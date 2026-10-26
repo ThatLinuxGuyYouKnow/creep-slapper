@@ -3,9 +3,11 @@ import DumpField from './components/DumpField';
 import ContextField, { type FetchStatus } from './components/ContextField';
 import SlapResult from './components/SlapResult';
 import { slap, type SlapResult as SlapData } from './lib/api';
+import { DEMO_SEEDS } from './lib/demo-seeds';
 
 export default function App() {
   const [dump, setDump] = useState('');
+  const [demoIndex, setDemoIndex] = useState(0);
   const [link, setLink] = useState('');
   const [contextText, setContextText] = useState('');
   const [fetchStatus] = useState<FetchStatus>('idle');
@@ -14,6 +16,13 @@ export default function App() {
   const [result, setResult] = useState<SlapData | null>(null);
 
   const canSlap = dump.trim().length > 0 && !working;
+
+  function handleLoadDemo() {
+    setDump(DEMO_SEEDS[demoIndex % DEMO_SEEDS.length]);
+    setDemoIndex((i) => i + 1);
+    setResult(null);
+    setError(null);
+  }
 
   async function handleSlap() {
     if (!canSlap) return;
@@ -37,7 +46,7 @@ export default function App() {
         <p>Paste the over-ambitious startup. Get slapped back to a shippable MVP.</p>
       </header>
 
-      <DumpField value={dump} onChange={setDump} />
+      <DumpField value={dump} onChange={setDump} onLoadDemo={handleLoadDemo} />
 
       <ContextField
         link={link}

@@ -25,9 +25,10 @@ Neo-brutalist, light background with bright flat accent blocks, thick black bord
 ## Features and Behavior
 
 ### Dump input + Deepgram STT
-Type freely into the dump field. STT button streams speech-to-text into the same field as it arrives, so speaking and typing mix.
+Type freely into the dump field. STT button streams speech-to-text into the same field as it arrives, so speaking and typing mix. A load-demo button fills the field with a seeded over-scoped idea for demos.
 - [ ] Typed text stays editable in the dump field
 - [ ] While speaking, streamed words appear in the dump field live
+- [ ] Load-demo fills the dump field with a seeded over-scoped idea
 - [ ] Empty dump + SLAP is blocked with a guard message
 
 ### Context input + link fetch

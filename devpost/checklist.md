@@ -28,7 +28,17 @@ Build mode: fast
   Learner check: Slap one of your real hackathon brain dumps and say whether the cut feels ruthless in the right way.
   Commit: `Slice 2: real DeepSeek slap with pasted context`
 
-- [ ] **3. Link context via Firecrawl with loader to tick**
+- [x] **3. Load-demo pool of over-scoped ideas**
+  Becomes usable: A "load demo creep" button fills the dump field from a seeded pool, rotating each press — demos never start from a blank box.
+  Why now: Learner feedback at the early checkpoint; cheapest possible demo aid (pure data, no service), and it speeds up trying every later slice.
+  PRD ref: `prd.md > Dump input + Deepgram STT` (load-demo behavior)
+  Spec ref: `spec.md > Components` (DumpField + SttButton), `spec.md > File Structure` (lib/demo-seeds.ts)
+  Build: Add `src/lib/demo-seeds.ts` pool; wire button in DumpField to cycle seeds into the dump field, clearing stale result/error.
+  Verify (mechanical): Build passes; press handler cycles seeds (pool length check) and clears prior result.
+  Learner check: Hit "load demo creep" twice and say whether the seeds feel demo-worthy.
+  Commit: `Demo seed pool + load button`
+
+- [ ] **4. Link context via Firecrawl with loader to tick**
   Becomes usable: Pasting a hackathon link fetches readable text through `/api/context`, showing loader then tick, and the slap uses it; bad links warn and proceed.
   Why now: Second external service after the kernel is real; the Firecrawl endpoint shape is the next risk, isolated in one slice.
   PRD ref: `prd.md > Context input + link fetch`, `prd.md > States and Boundaries` (empty context, bad link)
@@ -38,7 +48,7 @@ Build mode: fast
   Learner check: Try your hackathon link plus raw text and say whether the context status is clear while waiting.
   Commit: `Slice 3: Firecrawl link context with status states`
 
-- [ ] **4. Voice fill via Deepgram into the dump field**
+- [ ] **5. Voice fill via Deepgram into the dump field**
   Becomes usable: Hold STT, speak, and words stream into the dump field; mic denial warns and typing still works.
   Why now: Last external service, independent of the kernel; the live-vs-chunk method gets verified here without disturbing the proven slap path.
   PRD ref: `prd.md > Dump input + Deepgram STT`
@@ -48,7 +58,7 @@ Build mode: fast
   Learner check: Dictate part of a dump and type the rest, then say whether the mix feels smooth.
   Commit: `Slice 4: Deepgram voice fill for dump field`
 
-- [ ] **5. Guards, polish, and deploy readiness**
+- [ ] **6. Guards, polish, and deploy readiness**
   Becomes usable: Demo-ready PoC — all guards in place, light neo-brutalist finish, `.env.example` + README run/record instructions, deployed to Vercel.
   Why now: Needs every behavior in place to verify states end to end; nothing new is invented here.
   PRD ref: `prd.md > States and Boundaries`, `prd.md > What We're Building`, `prd.md > Non-Goals`
@@ -81,3 +91,4 @@ Activity mode: [live app and editor, explicit static fallback, focused alternati
 
 ## Revisions
 
+- Added load-demo seed pool + button (new slice 3, later slices renumbered) — early-checkpoint feedback asked for demo material; pure-data change, no new service.

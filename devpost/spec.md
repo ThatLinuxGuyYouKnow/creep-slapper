@@ -46,7 +46,7 @@ Single stacked page: header, dump field, STT button, context field + fetch statu
 PRD ref: `prd.md > Screens and Layout, Features and Behavior`.
 
 ### DumpField + SttButton
-Editable textarea + mic button. Streams returned words into the textarea as they arrive; typing and speaking mix.
+Editable textarea + mic button. Streams returned words into the textarea as they arrive; typing and speaking mix. Includes a load-demo button that fills the field from a seeded pool (demo aid, no service).
 PRD ref: `prd.md > Dump input + Deepgram STT`.
 
 ### ContextField + FetchStatus
@@ -91,7 +91,8 @@ project/
 │   │   └── SlapResult.tsx   # keep/checklist/struck creeps + CSS slap
 │   ├── lib/
 │   │   ├── api.ts       # fetch wrappers for /api/*
-│   │   └── prompt.ts    # slap prompt builder (dump + context → prompt)
+│   │   ├── prompt.ts    # slap prompt builder (dump + context → prompt)
+│   │   └── demo-seeds.ts # seeded over-scoped ideas for the load-demo button
 │   ├── index.css        # neo-brutalist: light bg, thick borders, flat accents
 │   └── main.tsx         # Vite entry
 ├── devpost/        # Devpost learning workspace
