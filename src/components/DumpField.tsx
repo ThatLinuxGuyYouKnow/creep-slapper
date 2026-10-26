@@ -53,25 +53,31 @@ export default function DumpField({ value, onChange, onLoadDemo, onDictated }: P
     setTalking(false);
   }
 
+  const len = value.trim().length;
+
   return (
     <section className="panel">
-      <label className="label" htmlFor="dump">
-        1 · Dump the giant idea
-      </label>
+      <span className="step-tab">Step 01 · the dump</span>
+      <div className="panel-head">
+        <label className="label" htmlFor="dump">
+          Dump the giant idea
+        </label>
+        <span className={`count${len === 0 ? '' : ''}`}>{len} chars</span>
+      </div>
       <textarea
         id="dump"
         className="field"
         rows={7}
-        placeholder="Brain-dump the whole over-ambitious startup here…"
+        placeholder="Brain-dump the whole over-ambitious startup here… features, platforms, AI, blockchain, world domination plans, all of it."
         value={value}
         onChange={(e) => onChange(e.target.value)}
       />
       <div className="row">
-        <button className="btn btn-ghost" type="button" onClick={onLoadDemo}>
+        <button className="btn btn-demo" type="button" onClick={onLoadDemo}>
           🎲 Load demo creep
         </button>
         <button
-          className="btn btn-ghost"
+          className={`btn btn-talk${talking ? ' recording' : ''}`}
           type="button"
           disabled={!supported}
           title={supported ? 'Hold to talk, release to stop' : 'Mic not supported in this browser'}
