@@ -76,13 +76,21 @@ Build mode: fast
 
 ## Final Review
 
+Kick-the-tires outcome: learner ran the app, reported no issues, no revision items requested.
+
 - [ ] Final review complete — feedback resolved and learner confirms ready to ship
 
 ## Code Tour and App Map
 
-- [ ] Learning activity complete — guided route, focused alternative, prior practice connected, or brief recap
-- [ ] Optional edit and transfer reflection addressed — offered/declined/already covered/not applicable as appropriate
-- [ ] `devpost/app-map.html` generated from finished code, checked, and shown, including a project-grounded practice to reuse
+- [x] Learning activity complete — guided route, focused alternative, prior practice connected, or brief recap
+- [x] Optional edit and transfer reflection addressed — offered/declined/already covered/not applicable as appropriate
+- [x] `devpost/app-map.html` generated from finished code, checked, and shown, including a project-grounded practice to reuse
+
+Activity and evidence: Focused alternative + recap (practice already happened during build, not repeated). Gating contract per slice — `Verify (mechanical)` + learner check + commit + tick — with evidence: esbuild-bundle harnesses proving `api/slap.ts`, `api/context.ts`, `api/stt.ts` without deploying; forced-failure runs (empty dump → 400, missing key → 500, dead link → 422); Firecrawl 401 on both v1+v2 diagnosed as invalid key (not wrong endpoint) via identical-error evidence, key corrected, live 200 re-verified.
+Route and stops: reference-only route (not toured interactively) — `src/App.tsx` `handleSlap` (search: `LINK CONTEXT`) → `api/slap.ts` `handler` (search: `isStringArray`). Map labels it reference-only.
+Edit outcome: learner-requested favicon logo (`public/slap.svg`, wired in `index.html`), kept and verified (build emits `dist/slap.svg`, link tag present), committed with the map.
+Reflection: offered ("What would you do differently next time you start with an agent?"), awaiting answer — personal answer belongs only in the ignored profile.
+Activity mode: focused alternative, live app + editor (learner ran the app at both checkpoints).
 
 Activity and evidence: [what actually happened; real document/test/code references; unfinished work if interrupted]
 Route and stops: [actual paths and symbols; guided stops completed, or reference-only route]

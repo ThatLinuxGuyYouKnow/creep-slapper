@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <rect x="4" y="4" width="56" height="56" fill="#FFD02F" stroke="#141414" stroke-width="6"/>
+  <rect x="4" y="38" width="56" height="22" fill="#FF5C5C" stroke="#141414" stroke-width="6"/>
+  <text x="32" y="33" text-anchor="middle" font-family="Courier New, monospace" font-weight="bold" font-size="26" fill="#141414">S!</text>
+</svg>
