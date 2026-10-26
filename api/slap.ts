@@ -2,7 +2,33 @@
 // Key stays server-side in DEEPSEEK_API_KEY. Warn-and-retry contract: failures are
 // 4xx/5xx JSON so the frontend can warn with inputs intact (PRD: slap failure).
 
-import { buildSlapPrompt } from '../src/lib/prompt';
+// NOTE: prompt builder is inlined here (not imported from ../src/lib/prompt).
+// Vercel compiles api/*.ts to /var/task/api/*.js as ESM, and an extensionless
+// cross-directory import fails at runtime with ERR_MODULE_NOT_FOUND.
+// Keeping api/ self-contained avoids that.
+function buildSlapPrompt(dump: string, contextText: string): string {
+  const context = contextText.trim()
+    ? `HACKATHON CONTEXT (rules, prizes, judging — trim FOR this comp):\n${contextText.trim().slice(0, 8000)}`
+    : 'HACKATHON CONTEXT: none provided. Cut blind, and say so in one line.';
+
+  return `You are the Scope-Creep Slapper 9000: brutal, funny, demo-minded.
+Someone pasted a wildly over-ambitious hackathon idea. Ruthlessly cut ~80% and return the bare-minimum MVP that can actually be demoed on time.
+
+RULES:
+- Keep what proves the core idea in a 1-minute demo. Cut everything else.
+- Demo-minded: KEEP flashy UI/polish if it makes the demo land, even if it looks "unnecessary".
+- Context-aware: use the hackathon context when present; ignore irrelevant ambition.
+- Be blunt and funny in the wording, but keep every item short and shippable.
+
+THE IDEA:
+${dump.trim().slice(0, 4000)}
+
+${context}
+
+Return ONLY valid JSON, no markdown fences, exactly this shape:
+{"keep": ["..."], "checklist": ["..."], "creeps": ["..."]}
+keep = what survives. checklist = ordered MVP steps to ship it. creeps = the slapped cuts.`;
+}
 
 const ENDPOINT = 'https://api.deepseek.com/chat/completions';
 const MODEL = 'deepseek-chat';
