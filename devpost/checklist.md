@@ -58,7 +58,7 @@ Build mode: fast
   Learner check: Dictate part of a dump and type the rest, then say whether the mix feels smooth.
   Commit: `Slice 4: Deepgram voice fill for dump field`
 
-- [ ] **6. Guards, polish, and deploy readiness**
+- [x] **6. Guards, polish, and deploy readiness**
   Becomes usable: Demo-ready PoC — all guards in place, light neo-brutalist finish, `.env.example` + README run/record instructions, deployed to Vercel.
   Why now: Needs every behavior in place to verify states end to end; nothing new is invented here.
   PRD ref: `prd.md > States and Boundaries`, `prd.md > What We're Building`, `prd.md > Non-Goals`

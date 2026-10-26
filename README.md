@@ -1,50 +1,44 @@
-# React + TypeScript + Vite
+# Scope-Creep Slapper 9000
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Paste your wildly over-ambitious hackathon idea. Get slapped back to a shippable MVP.
 
-Currently, two official plugins are available:
+Built for the [Build With AI: Basics](https://learn-ai-basics.devpost.com) hackathon. One page: dump the giant idea, add context (hackathon link and/or raw text, or dictate via mic), hit **SLAP** — back comes a keep list, an MVP checklist, and your creeps struck through.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Quickstart
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+```bash
+npm install
+cp .env.example .env   # then fill in real keys (never commit .env)
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+| Var | Used by | Get it at |
+| --- | ------- | --------- |
+| `DEEPSEEK_API_KEY` | `api/slap.ts` — the cut | DeepSeek platform |
+| `DEEPGRAM_API_KEY` | `api/stt.ts` — voice fill (slice 5) | Deepgram console |
+| `FIRECRAWL_API_KEY` | `api/context.ts` — link fetch | Firecrawl dashboard |
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
+```bash
+npm run dev        # frontend only (slap shows the warn path: no /api here)
+npx vercel dev     # full local path: frontend + /api/* together (recommended)
 ```
+
+## 1-minute demo script
+
+1. Hit **🎲 Load demo creep** — a gloriously over-scoped idea fills the box.
+2. Paste a hackathon link, watch loader → tick as context lands.
+3. Hit **👋 SLAP!** — keep list, MVP checklist, and struck-through creeps.
+4. (Optional) dictate half a dump via mic; type the rest.
+
+## Deploy (Vercel)
+
+```bash
+git push origin main   # then: Vercel dashboard → import repo
+```
+
+Add the three env vars above in the Vercel project settings and deploy. Submission still needs the demo video + public repo — deployment is a bonus, not a substitute.
+
+## What it is / isn't (PoC boundary)
+
+- Single page, no accounts, no saved history — close the tab and the slap is gone.
+- Bad links, empty context, and slap failures warn and let you retry with inputs intact. Only an empty dump blocks.
+- CSS slap flourish, not 3D — the joke holds at PoC cost.
