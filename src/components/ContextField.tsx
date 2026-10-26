@@ -6,6 +6,7 @@ interface Props {
   status: FetchStatus;
   onLink: (v: string) => void;
   onText: (v: string) => void;
+  onLinkBlur: () => void;
 }
 
 const STATUS_COPY: Record<FetchStatus, string> = {
@@ -15,7 +16,7 @@ const STATUS_COPY: Record<FetchStatus, string> = {
   warn: '⚠ Link failed — slap proceeds with what you pasted.',
 };
 
-export default function ContextField({ link, text, status, onLink, onText }: Props) {
+export default function ContextField({ link, text, status, onLink, onText, onLinkBlur }: Props) {
   return (
     <section className="panel">
       <label className="label" htmlFor="context-link">
@@ -28,6 +29,7 @@ export default function ContextField({ link, text, status, onLink, onText }: Pro
         placeholder="Hackathon / pitchathon link (optional)"
         value={link}
         onChange={(e) => onLink(e.target.value)}
+        onBlur={onLinkBlur}
       />
       <textarea
         id="context-text"

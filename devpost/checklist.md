@@ -38,7 +38,7 @@ Build mode: fast
   Learner check: Hit "load demo creep" twice and say whether the seeds feel demo-worthy.
   Commit: `Demo seed pool + load button`
 
-- [ ] **4. Link context via Firecrawl with loader to tick**
+- [x] **4. Link context via Firecrawl with loader to tick**
   Becomes usable: Pasting a hackathon link fetches readable text through `/api/context`, showing loader then tick, and the slap uses it; bad links warn and proceed.
   Why now: Second external service after the kernel is real; the Firecrawl endpoint shape is the next risk, isolated in one slice.
   PRD ref: `prd.md > Context input + link fetch`, `prd.md > States and Boundaries` (empty context, bad link)
@@ -70,7 +70,8 @@ Build mode: fast
 
 ## Hands-on Checkpoints
 
-- [ ] Early usable behavior explored — after slice 2 (real slap; feedback can shape context/voice slices)
+- [x] Early usable behavior explored — after slice 2 (real slap; feedback can shape context/voice slices)
+  Evidence: learner liked real slap, requested demo-seed pool (implemented as slice 3); 404 explained as frontend-only dev, vercel-dev path given.
 - [ ] Final kick-the-tires exploration and feedback completed
 
 ## Final Review
