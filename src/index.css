@@ -1,0 +1,169 @@
+/* Light-accent neo-brutalist: thick black borders, flat blocks, hard shadows. */
+
+:root {
+  --paper: #fff8ec;
+  --ink: #141414;
+  --accent: #ffd02f;
+  --slap: #ff5c5c;
+  --ok: #2f9e44;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: 'Courier New', ui-monospace, monospace;
+}
+
+.page {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 24px 16px 64px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.hero {
+  border: 3px solid var(--ink);
+  background: var(--accent);
+  box-shadow: 5px 5px 0 var(--ink);
+  padding: 16px;
+}
+
+.hero h1 {
+  margin: 0 0 8px;
+  font-size: 1.6rem;
+  text-transform: uppercase;
+}
+
+.slap-word {
+  background: var(--slap);
+  color: #fff;
+  padding: 0 8px;
+  display: inline-block;
+  transform: rotate(-2deg);
+}
+
+.hero p {
+  margin: 0;
+  font-weight: bold;
+}
+
+.panel {
+  border: 3px solid var(--ink);
+  background: #fff;
+  box-shadow: 5px 5px 0 var(--ink);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.label {
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.field {
+  border: 3px solid var(--ink);
+  padding: 10px;
+  font: inherit;
+  width: 100%;
+  background: var(--paper);
+}
+
+.field:focus {
+  outline: 3px solid var(--accent);
+}
+
+.row {
+  display: flex;
+  gap: 8px;
+}
+
+.btn {
+  border: 3px solid var(--ink);
+  box-shadow: 4px 4px 0 var(--ink);
+  font: inherit;
+  font-weight: bold;
+  padding: 10px 16px;
+  cursor: pointer;
+  background: #fff;
+  text-transform: uppercase;
+}
+
+.btn:active:not(:disabled) {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0 var(--ink);
+}
+
+.btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.btn-slap {
+  background: var(--slap);
+  color: #fff;
+  font-size: 1.4rem;
+  padding: 16px;
+}
+
+.btn-ghost {
+  background: var(--paper);
+}
+
+.hint {
+  margin: 0;
+  font-weight: bold;
+}
+
+.status {
+  margin: 0;
+  font-weight: bold;
+}
+
+.status-warn {
+  color: var(--slap);
+}
+
+.status-done {
+  color: var(--ok);
+}
+
+.result h3 {
+  margin: 12px 0 4px;
+  text-transform: uppercase;
+}
+
+.result ul {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.checklist {
+  list-style: '☑ ';
+}
+
+.creeps s {
+  text-decoration-thickness: 3px;
+  text-decoration-color: var(--slap);
+}
+
+.slap-in {
+  animation: slap-in 0.35s steps(3) both;
+}
+
+@keyframes slap-in {
+  0% {
+    transform: rotate(-1.5deg) scale(1.03);
+  }
+  100% {
+    transform: none;
+  }
+}
