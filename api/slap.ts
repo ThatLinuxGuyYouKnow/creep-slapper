@@ -26,15 +26,38 @@ ${dump.trim().slice(0, 4000)}
 ${context}
 
 Return ONLY valid JSON, no markdown fences, exactly this shape:
-{"keep": ["..."], "checklist": ["..."], "creeps": ["..."]}
-keep = what survives. checklist = ordered MVP steps to ship it. creeps = the slapped cuts.`;
+{"keep": ["..."], "checklist": ["..."], "creeps": [{"item": "...", "why": "..."}]}
+keep = what survives. checklist = ordered MVP steps to ship it. creeps = the slapped cuts, each with a one-line brutal funny "why" explaining why it kills the demo.`;
 }
 
 const ENDPOINT = 'https://api.deepseek.com/chat/completions';
 const MODEL = 'deepseek-chat';
 
+interface Creep {
+  item: string;
+  why: string;
+}
+
 function isStringArray(v: unknown): v is string[] {
   return Array.isArray(v) && v.every((x) => typeof x === 'string');
+}
+
+/** New shape is {item, why} objects; legacy string[] still accepted. */
+function normalizeCreeps(v: unknown): Creep[] | null {
+  if (!Array.isArray(v)) return null;
+  const out: Creep[] = [];
+  for (const c of v) {
+    if (typeof c === 'string') {
+      if (c.trim()) out.push({ item: c, why: '' });
+    } else if (c && typeof c === 'object') {
+      const o = c as Record<string, unknown>;
+      if (typeof o.item !== 'string' || !o.item.trim()) return null;
+      out.push({ item: o.item, why: typeof o.why === 'string' ? o.why : '' });
+    } else {
+      return null;
+    }
+  }
+  return out;
 }
 
 function extractJson(text: string): unknown {
@@ -81,10 +104,11 @@ export default async function handler(req: any, res: any) {
     const content = data?.choices?.[0]?.message?.content;
     if (typeof content !== 'string') throw new Error('no content');
     const parsed = extractJson(content) as { keep?: unknown; checklist?: unknown; creeps?: unknown };
-    if (!isStringArray(parsed.keep) || !isStringArray(parsed.checklist) || !isStringArray(parsed.creeps)) {
+    const creeps = normalizeCreeps(parsed.creeps);
+    if (!isStringArray(parsed.keep) || !isStringArray(parsed.checklist) || !creeps) {
       throw new Error('bad shape');
     }
-    res.status(200).json({ keep: parsed.keep, checklist: parsed.checklist, creeps: parsed.creeps });
+    res.status(200).json({ keep: parsed.keep, checklist: parsed.checklist, creeps });
   } catch {
     res.status(502).json({ error: 'The slap missed — model output was unusable. Retry?' });
   }

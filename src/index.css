@@ -726,7 +726,7 @@ textarea.field {
   position: relative;
   opacity: 0;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 10px;
   animation: creep-slap 0.5s cubic-bezier(0.2, 1.3, 0.3, 1) forwards;
   animation-delay: var(--d, 0s);
@@ -790,6 +790,7 @@ textarea.field {
   border-radius: 50%;
   width: 36px;
   height: 36px;
+  margin-top: 1px;
   display: grid;
   place-items: center;
   opacity: 0;
@@ -829,11 +830,68 @@ textarea.field {
   60% { transform: translate(-3px, 1px); }
   80% { transform: translate(2px, -1px); }
 }
-.creep-card s {
+.creep-body {
   flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+}
+.btn-why {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.68rem;
+  font-weight: 700;
+  border: 2px solid var(--ink);
+  border-radius: 999px;
+  background: #fff;
+  color: var(--ink);
+  padding: 3px 10px;
+  cursor: pointer;
+  box-shadow: 2px 2px 0 var(--ink);
+  transition:
+    transform 0.1s ease,
+    box-shadow 0.1s ease;
+}
+.btn-why:hover {
+  transform: translate(-1px, -1px);
+  box-shadow: 3px 3px 0 var(--ink);
+}
+.btn-why:active {
+  transform: translate(1px, 1px);
+  box-shadow: 1px 1px 0 var(--ink);
+}
+.creep-why {
+  margin: 0;
+  background: var(--ink);
+  color: var(--accent);
+  font-family: 'Space Mono', monospace;
+  font-size: 0.76rem;
+  font-weight: 700;
+  line-height: 1.45;
+  border-radius: 8px;
+  padding: 8px 10px;
+  animation: why-pop 0.18s ease-out;
+}
+.why-tag {
+  color: #fff;
+}
+@keyframes why-pop {
+  from {
+    opacity: 0;
+    transform: translateY(-4px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.cut-anchor {
+  scroll-margin-top: 12px;
 }
 .slap-stamp {
   flex: none;
+  margin-top: 5px;
   font-family: 'Archivo Black', sans-serif;
   font-size: 0.62rem;
   letter-spacing: 0.08em;
@@ -868,6 +926,7 @@ textarea.field {
   .creep-card,
   .creep-card::after,
   .creep-hand,
+  .creep-why,
   .stage.impact,
   .ticker-track,
   .btn-slap:not(:disabled) .slap-hand {

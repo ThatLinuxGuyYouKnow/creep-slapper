@@ -1,7 +1,31 @@
+export interface Creep {
+  item: string;
+  why: string;
+}
+
 export interface SlapResult {
   keep: string[];
   checklist: string[];
-  creeps: string[];
+  creeps: Creep[];
+}
+
+function stringList(v: unknown): string[] {
+  return Array.isArray(v) ? v.filter((x): x is string => typeof x === 'string') : [];
+}
+
+/** Normalizes creeps: new shape is {item, why} objects; legacy string[] still works. */
+function normalizeCreeps(v: unknown): Creep[] {
+  if (!Array.isArray(v)) return [];
+  return v.flatMap((c): Creep[] => {
+    if (typeof c === 'string') return c.trim() ? [{ item: c, why: '' }] : [];
+    if (c && typeof c === 'object') {
+      const o = c as { item?: unknown; why?: unknown };
+      if (typeof o.item === 'string' && o.item.trim()) {
+        return [{ item: o.item, why: typeof o.why === 'string' ? o.why : '' }];
+      }
+    }
+    return [];
+  });
 }
 
 /** Real path: POSTs to the server function, which holds the key.
@@ -26,5 +50,10 @@ export async function slap(
       body && typeof body.error === 'string' ? body.error : `Slap failed (${res.status}). Retry?`;
     throw new Error(msg);
   }
-  return (await res.json()) as SlapResult;
+  const data = (await res.json()) as { keep?: unknown; checklist?: unknown; creeps?: unknown };
+  return {
+    keep: stringList(data.keep),
+    checklist: stringList(data.checklist),
+    creeps: normalizeCreeps(data.creeps),
+  };
 }

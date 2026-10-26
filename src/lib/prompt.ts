@@ -21,6 +21,6 @@ ${dump.trim().slice(0, 4000)}
 ${context}
 
 Return ONLY valid JSON, no markdown fences, exactly this shape:
-{"keep": ["..."], "checklist": ["..."], "creeps": ["..."]}
-keep = what survives. checklist = ordered MVP steps to ship it. creeps = the slapped cuts.`;
+{"keep": ["..."], "checklist": ["..."], "creeps": [{"item": "...", "why": "..."}]}
+keep = what survives. checklist = ordered MVP steps to ship it. creeps = the slapped cuts, each with a one-line brutal funny "why" explaining why it kills the demo.`;
 }
