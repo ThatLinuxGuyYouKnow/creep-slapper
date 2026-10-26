@@ -136,6 +136,11 @@ body {
   color: var(--ok);
 }
 
+.error {
+  background: #ffe3e3;
+  font-weight: bold;
+}
+
 .result h3 {
   margin: 12px 0 4px;
   text-transform: uppercase;

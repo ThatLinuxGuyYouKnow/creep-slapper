@@ -8,7 +8,7 @@ Build mode: fast
 
 ## Slices
 
-- [ ] **1. Stacked page runs and a mock slap proves the whole path**
+- [x] **1. Stacked page runs and a mock slap proves the whole path**
   Becomes usable: A running Vite React app with the stacked dump + context fields, STT/SLAP buttons, and a mock SLAP that renders keep / checklist / struck-through creeps with the CSS slap flourish.
   Why now: Bootstrapping lives inside slice one, and the unique kernel shows up immediately (even mocked) so every later slice has somewhere to land; the `/api/slap` stub also proves the Vercel functions wiring you flagged as least-sure.
   PRD ref: `prd.md > The Core Journey` (steps 1-6), `prd.md > Screens and Layout`
@@ -18,7 +18,7 @@ Build mode: fast
   Learner check: Open the page, run a mock slap with your own words, and say whether the stacked layout and slap moment feel like you pictured.
   Commit: `Slice 1: stacked page with mock slap path`
 
-- [ ] **2. Real slap via DeepSeek with pasted context**
+- [x] **2. Real slap via DeepSeek with pasted context**
   Becomes usable: SLAP calls the real LLM through `/api/slap` and returns a genuine keep / checklist / creeps cut using the pasted dump + raw context.
   Why now: The kernel becomes real at the earliest point; the DeepSeek model + JSON shape is the biggest prompt risk and finding that out now is cheap, before adding more services.
   PRD ref: `prd.md > Slap + result`, `prd.md > States and Boundaries` (success, slap failure)

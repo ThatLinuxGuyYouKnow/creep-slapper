@@ -10,6 +10,7 @@ export default function App() {
   const [contextText, setContextText] = useState('');
   const [fetchStatus] = useState<FetchStatus>('idle');
   const [working, setWorking] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const [result, setResult] = useState<SlapData | null>(null);
 
   const canSlap = dump.trim().length > 0 && !working;
@@ -17,8 +18,11 @@ export default function App() {
   async function handleSlap() {
     if (!canSlap) return;
     setWorking(true);
+    setError(null);
     try {
       setResult(await slap(dump, contextText));
+    } catch (e) {
+      setError(e instanceof Error ? e.message : 'The slap missed. Retry?');
     } finally {
       setWorking(false);
     }
@@ -47,6 +51,12 @@ export default function App() {
         {working ? 'Slapping…' : '👋 SLAP!'}
       </button>
       {!dump.trim() && <p className="hint">Dump can’t be empty — give me the giant idea first.</p>}
+
+      {error && (
+        <p className="panel error" role="alert">
+          ⚠ {error}
+        </p>
+      )}
 
       {result && <SlapResult result={result} />}
     </main>
