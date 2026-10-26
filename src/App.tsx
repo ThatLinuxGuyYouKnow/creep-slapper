@@ -27,6 +27,10 @@ export default function App() {
     setError(null);
   }
 
+  function handleDictated(text: string) {
+    setDump((d) => (d.endsWith(' ') || d === '' ? d : d + ' ') + text + ' ');
+  }
+
   /** Eager link fetch on blur: loader -> tick, cached for the slap. */
   async function handleLinkBlur() {
     const url = link.trim();
@@ -86,7 +90,7 @@ export default function App() {
         <p>Paste the over-ambitious startup. Get slapped back to a shippable MVP.</p>
       </header>
 
-      <DumpField value={dump} onChange={setDump} onLoadDemo={handleLoadDemo} />
+      <DumpField value={dump} onChange={setDump} onLoadDemo={handleLoadDemo} onDictated={handleDictated} />
 
       <ContextField
         link={link}

@@ -48,7 +48,7 @@ Build mode: fast
   Learner check: Try your hackathon link plus raw text and say whether the context status is clear while waiting.
   Commit: `Slice 3: Firecrawl link context with status states`
 
-- [ ] **5. Voice fill via Deepgram into the dump field**
+- [x] **5. Voice fill via Deepgram into the dump field**
   Becomes usable: Hold STT, speak, and words stream into the dump field; mic denial warns and typing still works.
   Why now: Last external service, independent of the kernel; the live-vs-chunk method gets verified here without disturbing the proven slap path.
   PRD ref: `prd.md > Dump input + Deepgram STT`
